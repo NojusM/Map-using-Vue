@@ -1,52 +1,54 @@
-# vue
+# Map-using-Vue
 
-This template should help get you started developing with Vue 3 in Vite.
+Practical task to create a map app using Vue.js
 
-## Recommended IDE Setup
+## Learn basics of Vue
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Plan :
 
-## Type Support for `.vue` Imports in TS
+- Start my watching some tutorials
+- Do some on hand tasks to experience the development process
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+What i done :
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Create 2 pages - "About" and "Map"
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+Plan :
 
-## Customize configuration
+- Research how routing is implemented in Vue.js
+- Implement it by trial and error.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+What i done :
 
-## Project Setup
+## Implement Leaflet map
 
-```sh
-npm install
-```
+Plan :
 
-### Compile and Hot-Reload for Development
+- Try implementing Leaflet into Vue project. It somewhat finicky, so might run into some issues
 
-```sh
-npm run dev
-```
+What i done :
 
-### Type-Check, Compile and Minify for Production
+## Ability to place 2 markers on the map
 
-```sh
-npm run build
-```
+Plan :
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+- This task shouldn't be that difficult, as it should barely involve Vue.
 
-```sh
-npm run test:unit
-```
+What i done :
 
-### Lint with [ESLint](https://eslint.org/)
+## Display marker coordinates
 
-```sh
-npm run lint
-```
+Plan :
+
+- This task also shouldn't be that difficult for same reasons.
+
+What i done :
+
+## Add extra features
+
+- Show distance between markers
+- Remove markers
+- Move markers
+- Add sidebar
+- Let user input coordinates
+- Add geo look up (translate coordinates to location)
