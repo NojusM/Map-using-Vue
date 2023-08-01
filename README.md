@@ -26,8 +26,9 @@ What i done :
 - After setting up the base pages, I looked up into the implementation of routing
 - Although routing was initially included in the project, I decided to delete it to gain hands-on experience in creating it myself
 - While implementing routing, I came across a lot of package/config related issues
-- After debugging and fixing said issues, i could finnaly see my router working!
-- First i designed the navbar
+- After debugging and fixing said issues, I could finally see my router working!
+- First, I designed the Navbar
+- After creating the first version, I decided to recreate the About page to be similar to [Wilibox](https://www.wilibox.com). This required to use Vue functions, like `ref` and `v-bind` to automatically show a hamburger menu when the app viewport width than 1000px
 
 ## Implement Leaflet map
 
