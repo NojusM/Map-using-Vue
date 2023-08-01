@@ -11,6 +11,9 @@ Plan :
 
 What i done :
 
+- Began by watching some tutorials to understand the workflow (1h)
+- Proceeded to tackle the next task, utilizing videos and documentation to address specific problems
+
 ## Create 2 pages - "About" and "Map"
 
 Plan :
