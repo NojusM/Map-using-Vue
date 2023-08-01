@@ -2,7 +2,10 @@
 </script>
 
 <template>
-<div></div>
+<div class="nav">
+    <router-link to="/">About</router-link> |
+    <router-link to="/map">Map</router-link>
+</div>
 </template>
 
 <style scoped>
