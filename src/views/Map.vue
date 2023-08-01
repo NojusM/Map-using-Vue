@@ -6,6 +6,7 @@
           <span class="label">Marker position: </span>
           <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
         </p>
+        <button class="btn-delete" @click="markers.splice(index, 1)">Delete marker</button>
       </div>
       <button class="btn-add" @click="markers.push(BASE_COORDINATES)">Add marker</button>
     </div>
@@ -39,7 +40,7 @@ const BASE_COORDINATES: [number, number] = [55.23479, 23.92822]
 const zoom = ref(7)
 const center = ref(BASE_COORDINATES as PointExpression)
 const tileProviders = ref(tileProvidersData)
-const markers: Ref<[number, number][]> = ref([BASE_COORDINATES])
+const markers: Ref<[number, number][]> = ref([])
 const selectedMarker = ref(0)
 
 const onMapClick = (e: { latlng: LatLng }) => {
