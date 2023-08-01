@@ -1,17 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
 import { ref } from 'vue'
 import Navbar from '@/components/Navbar.vue'
 
-export default {
-  name: 'Home',
-  components: {
-    Navbar
-  },
-  setup() {
-    const pages = ref(['About', 'Map', 'Hello'])
-    return { pages }
-  }
-}
+const pages = ref(['About', 'Map', 'Hello'])
 </script>
 
 <template>
