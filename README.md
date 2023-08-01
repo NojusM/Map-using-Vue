@@ -76,6 +76,8 @@ What i done :
 - Remove markers
 - Move markers
 - Add sidebar
+- Created store with `Pinia` to store markers
+- Ability to select marker on click
 
 ### Todo
 
