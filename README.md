@@ -30,6 +30,8 @@ What i done :
 - First, I designed the Navbar
 - After creating the first version, I decided to recreate the About page to be similar to [Wilibox](https://www.wilibox.com). This required to use Vue functions, like `ref` and `v-bind` to automatically show a hamburger menu when the app viewport width than 1000px
 - Next, I populated the About page with placeholder data and started styling the component. I ran into some issues with text alignment because I tried to use `grid` instead of `flex`. However, I decided to keep the grid layout and just align the text to the center
+- Before moving on to the Map page, I thought it would be a good idea to practice my skills by separating the Navbar as a standalone component. It wasn't that difficult. To ensure reusability, I added props to the Navbar component, allowing it to accept different routes that are then displayed in the Navbar
+- It occurred to me that I should add a check to validate the passed route props. It took some time to figure out the best way to do this, and I encountered a few TypeScript type errors along the way. Eventually, I managed to implement the validation by obtaining a computed value of all filtered routes that actually exist in the app.
 
 ## Implement Leaflet map
 
