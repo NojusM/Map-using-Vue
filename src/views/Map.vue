@@ -71,6 +71,7 @@ const onMarkerDragEnd = (e: { target: { getLatLng: () => LatLng } }) => {
 
 .leaflet-container {
   font-size: 1.5rem;
+  border: 1px solid black;
 }
 
 .sidebar {
