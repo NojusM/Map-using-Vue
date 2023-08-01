@@ -18,8 +18,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --primary: hsl(205, 70%, 40%);
-  --primary-dark: hsl(205, 60%, 50%);
+  --primary: hsl(205, 60%, 50%);
+  --primary-dark: hsl(205, 70%, 40%);
   --primary-bright: hsl(205, 80%, 80%);
   background: white;
 }
