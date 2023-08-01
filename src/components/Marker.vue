@@ -6,6 +6,7 @@
     :icon="index === markerStore.selectedMarker ? SELECT_MARKER : DEFAULT_ICON"
     draggable
     @dragend="markerStore.addMarkerOnDrag"
+    @click="markerStore.setSelectedMarker(index)"
   ></l-marker>
 </template>
 
