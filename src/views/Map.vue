@@ -29,8 +29,14 @@
           :attribution="tileProvider.attribution"
           layer-type="base"
         />
-        <!-- prettier-ignore -->
-        <l-marker v-for="(marker, index) in markers" :key="index" :lat-lng="(marker as LatLngExpression)" draggable @dragend="onMarkerDragEnd"></l-marker>
+        <l-marker
+          v-for="(marker, index) in markers"
+          :key="index"
+          :lat-lng="marker as LatLngExpression"
+          :icon="index === selectedMarker ? SELECT_MARKER : DEFAULT_ICON"
+          draggable
+          @dragend="onMarkerDragEnd"
+        ></l-marker>
       </l-map>
     </div>
   </div>
@@ -38,6 +44,8 @@
 
 <script setup lang="ts">
 import 'leaflet/dist/leaflet.css'
+import CUSTOM_MARKER_ICON from '@/assets/custom-marker.png'
+import DEFAULT_MARKER_ICON from '@/assets/marker-icon.png'
 import tileProvidersData from '@/data/tileProviders.json'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import L, { LatLng, type LatLngExpression, type PointExpression } from 'leaflet'
@@ -45,6 +53,18 @@ import { LMap, LTileLayer, LControlLayers, LMarker } from '@vue-leaflet/vue-leaf
 import { ref, type Ref } from 'vue'
 import truncateFloat from '@/composibles/truncateFloat'
 const BASE_COORDINATES: [number, number] = [55.23479, 23.92822]
+const SELECT_MARKER = L.icon({
+  iconUrl: CUSTOM_MARKER_ICON,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34]
+})
+const DEFAULT_ICON = L.icon({
+  iconUrl: DEFAULT_MARKER_ICON,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34]
+})
 const zoom = ref(7)
 const center = ref(BASE_COORDINATES as PointExpression)
 const tileProviders = ref(tileProvidersData)
@@ -120,7 +140,7 @@ const onMarkerDragEnd = (e: { target: { getLatLng: () => LatLng } }) => {
 }
 
 .btn.select.active {
-  background-color: var(--primary-bright);
+  background-color: hsl(120, 47%, 55%);
   color: black;
 }
 
