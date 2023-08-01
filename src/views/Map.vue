@@ -1,5 +1,3 @@
 <template>
-    <div>
-        Map
-    </div>
+  <div>Map</div>
 </template>

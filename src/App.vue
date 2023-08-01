@@ -1,15 +1,13 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-<nav>
+  <nav>
     <router-link to="/">About</router-link> |
     <router-link to="/map">Map</router-link>
-</nav>
-<main>
+  </nav>
+  <main>
     <router-view />
   </main>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
