@@ -23,6 +23,12 @@ Plan :
 
 What i done :
 
+- After setting up the base pages, I looked up into the implementation of routing
+- Although routing was initially included in the project, I decided to delete it to gain hands-on experience in creating it myself
+- While implementing routing, I came across a lot of package/config related issues
+- After debugging and fixing said issues, i could finnaly see my router working!
+- First i designed the navbar
+
 ## Implement Leaflet map
 
 Plan :
