@@ -1,26 +1,29 @@
 <template>
   <div class="sidebar">
-    <div v-for="(marker, index) in props.markers.value" :key="index" class="marker-info">
+    <div v-for="(marker, index) in markerStore.markers" :key="index" class="marker-info">
       <p>
         <span class="label">Marker position: </span>
         <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
       </p>
       <div class="buttons">
         <button
-          :class="['btn select', { active: index === selectedMarker.value }]"
-          @click="selectedMarker = index"
+          :class="['btn select', { active: index === markerStore.selectedMarker }]"
+          @click="markerStore.setSelectedMarker(index)"
         >
           Select marker
         </button>
-        <button class="btn delete" @click="markers.splice(index, 1)">Delete marker</button>
+        <button class="btn delete" @click="markerStore.removeMarker(index)">Delete marker</button>
       </div>
     </div>
-    <button class="btn add" @click="markers.push(BASE_COORDINATES)">Add marker</button>
+    <button class="btn add" @click="markerStore.addMarker">Add marker</button>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useMarkersStore } from '@/stores/markers'
 
+const markerStore = useMarkersStore()
+</script>
 <style scoped>
 .sidebar {
   font-size: 2rem;

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Sidebar :markers="markers" :selected-marker="selectedMarker" />
+    <Sidebar />
     <div class="map">
       <l-map ref="map" v-model:zoom="zoom" v-model:center="center" @click="onMapClick">
         <l-control-layers position="bottomright"></l-control-layers>
