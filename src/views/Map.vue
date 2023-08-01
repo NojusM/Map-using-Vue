@@ -1,13 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="sidebar">
-      <div class="marker-info">
+      <div v-for="(marker, index) in markers" :key="index" class="marker-info">
         <p>
           <span class="label">Marker position: </span>
-          <span v-if="marker.length !== 0" class="coordinates"
-            >{{ marker[0] }}° N {{ marker[1] }}° E</span
-          >
-          <span v-else class="coordinates">Place a Marker!</span>
+          <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
         </p>
       </div>
     </div>
@@ -23,7 +20,7 @@
           layer-type="base"
         />
         <!-- prettier-ignore -->
-        <l-marker v-if="marker.length != 0" :lat-lng="(marker as LatLngExpression)" draggable @dragend="onMarkerDragEnd"></l-marker>
+        <l-marker v-for="(marker, index) in markers" :key="index" :lat-lng="(marker as LatLngExpression)" draggable @dragend="onMarkerDragEnd"></l-marker>
       </l-map>
     </div>
   </div>
@@ -39,21 +36,22 @@ import { ref, type Ref } from 'vue'
 import truncateFloat from '@/composibles/truncateFloat'
 const zoom = ref(7)
 const center = ref([55.23479, 23.92822] as PointExpression)
-const marker: Ref<[number, number] | []> = ref([])
 const tileProviders = ref(tileProvidersData)
+const markers: Ref<[number, number][] | []> = ref([[55.23479, 23.92822]])
+const selectedMarker = ref(0)
 
 const onMapClick = (e: { latlng: LatLng }) => {
   const { lat, lng } = e.latlng
   const truncatedLat = truncateFloat(lat, 5)
   const truncatedLng = truncateFloat(lng, 5)
-  marker.value = [truncatedLat, truncatedLng]
+  markers.value[selectedMarker.value] = [truncatedLat, truncatedLng]
 }
 
 const onMarkerDragEnd = (e: { target: { getLatLng: () => LatLng } }) => {
   const { lat, lng } = e.target.getLatLng()
   const truncatedLat = truncateFloat(lat, 5)
   const truncatedLng = truncateFloat(lng, 5)
-  marker.value = [truncatedLat, truncatedLng]
+  markers.value[selectedMarker.value] = [truncatedLat, truncatedLng]
 }
 </script>
 
