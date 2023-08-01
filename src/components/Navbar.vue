@@ -14,39 +14,31 @@
   </nav>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 //Script to toggle the hamburger menu
-import { defineComponent, ref, type PropType, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter, type RouteLocationNormalizedLoaded } from 'vue-router'
 
-export default defineComponent({
-  props: {
-    pages: Array as PropType<string[]>
-  },
-  setup(props) {
-    const router = useRouter()
-    const showDropdown = ref(false)
+const props = defineProps<{ pages: string[] }>()
+const router = useRouter()
+const showDropdown = ref(false)
 
-    const toggleDropdown = () => {
-      showDropdown.value = !showDropdown.value
-    }
+const toggleDropdown = () => {
+  showDropdown.value = !showDropdown.value
+}
 
-    // Check if the route with the given name exists
-    const routeExists = (routeName: string) => {
-      try {
-        const route = router.resolve({ name: routeName }) as RouteLocationNormalizedLoaded
-        return !!route.matched.length
-      } catch (error) {
-        return false
-      }
-    }
-
-    const existingPages = computed(() => {
-      return props.pages?.filter((page: string) => routeExists(page))
-    })
-
-    return { showDropdown, toggleDropdown, existingPages }
+// Check if the route with the given name exists
+const routeExists = (routeName: string) => {
+  try {
+    const route = router.resolve({ name: routeName }) as RouteLocationNormalizedLoaded
+    return !!route.matched.length
+  } catch (error) {
+    return false
   }
+}
+
+const existingPages = computed(() => {
+  return props.pages?.filter((page: string) => routeExists(page))
 })
 </script>
 
