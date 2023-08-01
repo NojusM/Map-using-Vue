@@ -16,24 +16,24 @@
 <style scoped>
 nav {
   display: grid;
-  grid-template-columns: 5fr 1fr;
-  border-bottom: 2px solid black;
-  padding: 1rem;
+  grid-template-columns: 1fr 1fr;
 }
 .title {
-  font-size: 4rem;
+  font-size: 3.5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .links {
   display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
 }
 
 .links a {
   color: black;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
   margin-right: 1rem;
 }
