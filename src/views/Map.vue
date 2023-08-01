@@ -6,9 +6,10 @@
           <span class="label">Marker position: </span>
           <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
         </p>
-        <button class="btn-delete" @click="markers.splice(index, 1)">Delete marker</button>
+        <button class="btn delete" @click="markers.splice(index, 1)">Delete marker</button>
+        <button class="btn select" @click="selectedMarker = index">Select marker</button>
       </div>
-      <button class="btn-add" @click="markers.push(BASE_COORDINATES)">Add marker</button>
+      <button class="btn add" @click="markers.push(BASE_COORDINATES)">Add marker</button>
     </div>
     <div class="map">
       <l-map ref="map" v-model:zoom="zoom" v-model:center="center" @click="onMapClick">
