@@ -27,6 +27,9 @@ actions: {
         const truncatedLng = truncateFloat(lng, 5)
         this.markers[selectedMarker] = [truncatedLat, truncatedLng]
     },
+    removeMarker(index: number) {
+        this.markers.splice(index, 1)
+    },
     setSelectedMarker(selectedMarker: number) {
         this.selectedMarker = selectedMarker
     }
