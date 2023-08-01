@@ -7,6 +7,7 @@
           <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
         </p>
       </div>
+      <button class="btn-add" @click="markers.push(BASE_COORDINATES)">Add marker</button>
     </div>
     <div class="map">
       <l-map ref="map" v-model:zoom="zoom" v-model:center="center" @click="onMapClick">
@@ -34,10 +35,11 @@ import L, { LatLng, type LatLngExpression, type PointExpression } from 'leaflet'
 import { LMap, LTileLayer, LControlLayers, LMarker } from '@vue-leaflet/vue-leaflet'
 import { ref, type Ref } from 'vue'
 import truncateFloat from '@/composibles/truncateFloat'
+const BASE_COORDINATES: [number, number] = [55.23479, 23.92822]
 const zoom = ref(7)
-const center = ref([55.23479, 23.92822] as PointExpression)
+const center = ref(BASE_COORDINATES as PointExpression)
 const tileProviders = ref(tileProvidersData)
-const markers: Ref<[number, number][] | []> = ref([[55.23479, 23.92822]])
+const markers: Ref<[number, number][]> = ref([BASE_COORDINATES])
 const selectedMarker = ref(0)
 
 const onMapClick = (e: { latlng: LatLng }) => {
