@@ -29,6 +29,7 @@ What i done :
 - After debugging and fixing said issues, I could finally see my router working!
 - First, I designed the Navbar
 - After creating the first version, I decided to recreate the About page to be similar to [Wilibox](https://www.wilibox.com). This required to use Vue functions, like `ref` and `v-bind` to automatically show a hamburger menu when the app viewport width than 1000px
+- Next, I populated the About page with placeholder data and started styling the component. I ran into some issues with text alignment because I tried to use `grid` instead of `flex`. However, I decided to keep the grid layout and just align the text to the center
 
 ## Implement Leaflet map
 
