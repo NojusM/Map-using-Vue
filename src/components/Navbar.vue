@@ -2,9 +2,13 @@
   <nav>
     <div class="title">VueMap</div>
     <div :class="{ links: true, 'show-dropdown': showDropdown }">
-      <router-link v-for="page in pages" :key="page" :to="{ name: page }" @click="toggleDropdown">{{
-        page
-      }}</router-link>
+      <router-link
+        v-for="page in existingPages"
+        :key="page"
+        :to="{ name: page }"
+        @click="toggleDropdown"
+        >{{ page }}</router-link
+      >
     </div>
     <div class="hamburger" @click="toggleDropdown">&#9776;</div>
   </nav>
@@ -12,19 +16,36 @@
 
 <script lang="ts">
 //Script to toggle the hamburger menu
-import { defineComponent, ref, type PropType } from 'vue'
+import { defineComponent, ref, type PropType, computed } from 'vue'
+import { useRouter, type RouteLocationNormalizedLoaded } from 'vue-router'
 
 export default defineComponent({
   props: {
     pages: Array as PropType<string[]>
   },
-  setup() {
+  setup(props) {
+    const router = useRouter()
     const showDropdown = ref(false)
+
     const toggleDropdown = () => {
       showDropdown.value = !showDropdown.value
     }
 
-    return { showDropdown, toggleDropdown }
+    // Check if the route with the given name exists
+    const routeExists = (routeName: string) => {
+      try {
+        const route = router.resolve({ name: routeName }) as RouteLocationNormalizedLoaded
+        return !!route.matched.length
+      } catch (error) {
+        return false
+      }
+    }
+
+    const existingPages = computed(() => {
+      return props.pages?.filter((page: string) => routeExists(page))
+    })
+
+    return { showDropdown, toggleDropdown, existingPages }
   }
 })
 </script>
