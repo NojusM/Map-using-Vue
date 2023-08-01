@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="sidebar"></div>
+    <div class="sidebar">
+      <div class="marker-info">Marker position: {{ marker[0] }}° N {{ marker[1] }}° E</div>
+    </div>
     <div class="map">
       <l-map ref="map" v-model:zoom="zoom" v-model:center="center">
         <l-control-layers position="bottomright"></l-control-layers>
@@ -12,7 +14,8 @@
           :attribution="tileProvider.attribution"
           layer-type="base"
         />
-        <l-marker :lat-lng="marker"></l-marker>
+        <!-- prettier-ignore -->
+        <l-marker :lat-lng="(marker as LatLngExpression)"></l-marker>
       </l-map>
     </div>
   </div>
@@ -27,7 +30,7 @@ import { LMap, LTileLayer, LControlLayers, LMarker } from '@vue-leaflet/vue-leaf
 import { ref } from 'vue'
 const zoom = ref(7)
 const center = ref([54.6872, 25.2797] as PointExpression)
-const marker = ref([54.6872, 25.2797] as LatLngExpression)
+const marker = ref([54.6872, 25.2797])
 const tileProviders = ref(tileProvidersData)
 </script>
 
@@ -35,7 +38,6 @@ const tileProviders = ref(tileProvidersData)
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  font-size: 5rem;
 }
 
 .map {
@@ -46,5 +48,9 @@ const tileProviders = ref(tileProvidersData)
 
 .leaflet-container {
   font-size: 1.5rem;
+}
+
+.sidebar {
+  font-size: 2rem;
 }
 </style>
