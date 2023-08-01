@@ -28,6 +28,7 @@ nav {
   grid-template-columns: 1fr 1fr;
   padding: 1rem;
   box-sizing: border-box;
+  margin-bottom: 5rem;
 }
 
 .title {
@@ -64,12 +65,6 @@ nav {
 
 @media (max-width: 1000px) {
   /* Change navbar links to hamburger */
-  nav {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 2rem 0 2rem;
-    gap: 1rem;
-  }
   .links {
     display: none;
     flex-direction: column;
