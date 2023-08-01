@@ -23,7 +23,7 @@
           layer-type="base"
         />
         <!-- prettier-ignore -->
-        <l-marker v-if="marker.length != 0" :lat-lng="(marker as LatLngExpression)"></l-marker>
+        <l-marker v-if="marker.length != 0" :lat-lng="(marker as LatLngExpression)" draggable @dragend="onMarkerDragEnd"></l-marker>
       </l-map>
     </div>
   </div>
@@ -44,6 +44,13 @@ const tileProviders = ref(tileProvidersData)
 
 const onMapClick = (e: { latlng: LatLng }) => {
   const { lat, lng } = e.latlng
+  const truncatedLat = truncateFloat(lat, 5)
+  const truncatedLng = truncateFloat(lng, 5)
+  marker.value = [truncatedLat, truncatedLng]
+}
+
+const onMarkerDragEnd = (e: { target: { getLatLng: () => LatLng } }) => {
+  const { lat, lng } = e.target.getLatLng()
   const truncatedLat = truncateFloat(lat, 5)
   const truncatedLng = truncateFloat(lng, 5)
   marker.value = [truncatedLat, truncatedLng]
