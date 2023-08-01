@@ -22,7 +22,7 @@
 import 'leaflet/dist/leaflet.css'
 import tileProvidersData from '@/data/tileProviders.json'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import L, { LatLng, type LatLngExpression, type PointExpression } from 'leaflet'
+import L, { type LatLngExpression, type PointExpression } from 'leaflet'
 import { LMap, LTileLayer, LControlLayers, LMarker } from '@vue-leaflet/vue-leaflet'
 import { ref } from 'vue'
 const zoom = ref(7)
