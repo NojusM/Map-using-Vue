@@ -43,7 +43,6 @@ What i done :
 
 - I first tried to implement the Leaflet map using Vue2Leaflet, but as the name suggests - it's specifically designed for Vue2 so I had to look for an alternative integration package. Eventually, I found Vue-Leaflet, which, although still in BETA, seemed to work well
 - To start the development, I followed the example provided in the package documentation. I then added tile layers to allow users to choose their preferred map style. Since the tile data cluttered the main project file, I extracted it into a JSON file
-- Next, I displayed a single static marker on the map and showed its coordinates in the sidebar. Had to play with Typescript a bit as Leaflet has and takes different coordinate types
 
 ## Ability to place 2 markers on the map
 
@@ -52,6 +51,8 @@ Plan :
 - This task shouldn't be that difficult, as it should barely involve Vue.
 
 What i done :
+
+- First, I displayed a single static marker on the map and showed its coordinates in the sidebar. Had to play with Typescript a bit as Leaflet has and takes different coordinate types
 
 ## Display marker coordinates
 
