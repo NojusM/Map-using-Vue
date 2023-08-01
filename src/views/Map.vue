@@ -1,7 +1,15 @@
 <template>
   <div class="wrapper">
     <div class="sidebar">
-      <div class="marker-info">Marker position: {{ marker[0] }}° N {{ marker[1] }}° E</div>
+      <div class="marker-info">
+        <p>
+          <span class="label">Marker position: </span>
+          <span v-if="marker.length !== 0" class="coordinates"
+            >{{ marker[0] }}° N {{ marker[1] }}° E</span
+          >
+          <span v-else class="coordinates">Place a Marker!</span>
+        </p>
+      </div>
     </div>
     <div class="map">
       <l-map ref="map" v-model:zoom="zoom" v-model:center="center" @click="onMapClick">
@@ -15,7 +23,7 @@
           layer-type="base"
         />
         <!-- prettier-ignore -->
-        <l-marker :lat-lng="(marker as LatLngExpression)"></l-marker>
+        <l-marker v-if="marker.length != 0" :lat-lng="(marker as LatLngExpression)"></l-marker>
       </l-map>
     </div>
   </div>
@@ -27,28 +35,31 @@ import tileProvidersData from '@/data/tileProviders.json'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import L, { LatLng, type LatLngExpression, type PointExpression } from 'leaflet'
 import { LMap, LTileLayer, LControlLayers, LMarker } from '@vue-leaflet/vue-leaflet'
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
+import truncateFloat from '@/composibles/truncateFloat'
 const zoom = ref(7)
-const center = ref([54.6872, 25.2797] as PointExpression)
-const marker = ref([54.6872, 25.2797])
+const center = ref([55.23479, 23.92822] as PointExpression)
+const marker: Ref<[number, number] | []> = ref([])
 const tileProviders = ref(tileProvidersData)
 
 const onMapClick = (e: { latlng: LatLng }) => {
   const { lat, lng } = e.latlng
-  marker.value = [lat, lng]
+  const truncatedLat = truncateFloat(lat, 5)
+  const truncatedLng = truncateFloat(lng, 5)
+  marker.value = [truncatedLat, truncatedLng]
 }
 </script>
 
 <style scoped>
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 3fr 7fr;
 }
 
 .map {
   height: 80vh;
   width: 100%;
-  padding-right: 10rem;
+  padding-right: 5rem;
 }
 
 .leaflet-container {
@@ -57,5 +68,14 @@ const onMapClick = (e: { latlng: LatLng }) => {
 
 .sidebar {
   font-size: 2rem;
+  padding: 1rem;
+}
+
+.label {
+  font-weight: 700;
+}
+
+.coordinates {
+  font-style: italic;
 }
 </style>
