@@ -19,7 +19,7 @@ What i done :
 Plan :
 
 - Research how routing is implemented in Vue.js
-- Implement it by trial and error.
+- Implement it by trial and error
 
 What i done :
 
@@ -48,25 +48,37 @@ What i done :
 
 Plan :
 
-- This task shouldn't be that difficult, as it should barely involve Vue.
+- This task shouldn't be that difficult, as it should barely involve Vue
 
 What i done :
 
 - First, I displayed a single static marker on the map and showed its coordinates in the sidebar. Had to play with Typescript a bit as Leaflet has and takes different coordinate types
+- Next, I implemented the ability to drag markers on the map, which turned out to be quite simple
+- Instead of limiting users to just two markers, I allowed them to create as many markers as they wanted. To achieve this, I created an array to hold the markers and dynamically displayed them on the map
+- After working on the sidebar, where the markers are controlled, I updated the marker icons on the map to differentiate them visually
 
 ## Display marker coordinates
 
 Plan :
 
-- This task also shouldn't be that difficult for same reasons.
+- This task also shouldn't be that difficult for same reasons
 
 What i done :
 
+- Initially, I displayed the entire coordinate array, but then I improved it by extracting and formatting the coordinates
+- After that, I added functionality to add, delete, and select markers. It was hard to indicate which marker was selected, so I worked on updating the CSS to provide visual feedback for the selected marker
+- And i was done with the main concept of the project!
+
 ## Add extra features
 
-- Show distance between markers
+### Done
+
 - Remove markers
 - Move markers
 - Add sidebar
+
+### Todo
+
+- Show distance between markers
 - Let user input coordinates
 - Add geo look up (translate coordinates to location)
