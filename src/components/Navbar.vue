@@ -2,8 +2,9 @@
   <nav>
     <div class="title">VueMap</div>
     <div :class="{ links: true, 'show-dropdown': showDropdown }">
-      <router-link to="/" @click="toggleDropdown">About</router-link>
-      <router-link :to="{ name: 'Map' }" @click="toggleDropdown">Map</router-link>
+      <router-link v-for="page in pages" :key="page" :to="{ name: page }" @click="toggleDropdown">{{
+        page
+      }}</router-link>
     </div>
     <div class="hamburger" @click="toggleDropdown">&#9776;</div>
   </nav>
@@ -11,9 +12,12 @@
 
 <script lang="ts">
 //Script to toggle the hamburger menu
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, type PropType } from 'vue'
 
 export default defineComponent({
+  props: {
+    pages: Array as PropType<string[]>
+  },
   setup() {
     const showDropdown = ref(false)
     const toggleDropdown = () => {

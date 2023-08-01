@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar.vue'
 </script>
 
 <template>
-  <Navbar></Navbar>
+  <Navbar :pages="['About', 'Map']" />
   <main>
     <router-view />
   </main>
