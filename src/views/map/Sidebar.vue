@@ -34,15 +34,44 @@
         <span class="label">Marker {{ index + 1 }} - </span>
         <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
       </p>
-      <button class="btn delete" @click="markerStore.removeMarker(index)">X</button>
+      <button class="btn delete" @click="openModal(index)">X</button>
+      <dialog ref="deleteConfModals" v-show="showModal">
+        <div class="modal-text">
+          Are you sure you want to delete
+          <i>Marker {{ index + 1 }}</i>
+          ?
+        </div>
+        <div class="modal-buttons">
+          <button class="btn modal-delete" @click="deleteMarker(index)">Delete</button>
+          <button class="btn modal-cancel" @click="closeModal(index)">Cancel</button>
+        </div>
+      </dialog>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useMarkersStore } from '@/stores/markers'
+import { ref } from 'vue'
+const showModal = ref(false)
 
 const markerStore = useMarkersStore()
+const deleteConfModals = ref()
+const openModal = (index: number) => {
+  showModal.value = true
+  deleteConfModals.value[index].showModal()
+}
+
+const closeModal = (index: number) => {
+  deleteConfModals.value[index].close()
+  showModal.value = false
+}
+
+const deleteMarker = (index: number) => {
+  markerStore.removeMarker(index)
+  closeModal(index)
+  showModal.value = false
+}
 </script>
 
 <style scoped>
@@ -97,13 +126,13 @@ const markerStore = useMarkersStore()
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
-  color: hsl(0, 90%, 40%);
+  color: var(--red);
   background-color: white;
 }
 
 .btn.delete:hover {
   color: white;
-  background-color: hsl(0, 90%, 40%);
+  background-color: var(--red);
 }
 
 .btn.add {
@@ -155,5 +184,46 @@ select:focus {
 select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+dialog {
+  inset: 0;
+  margin: auto;
+  border: 2px solid var(--red);
+  background-color: whitesmoke;
+  border-radius: 1rem;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-text {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+}
+.modal-cancel {
+  font-size: 3rem;
+}
+
+.modal-delete {
+  color: var(--red);
+  font-size: 3rem;
+}
+
+.modal-delete:hover {
+  background-color: var(--red);
+  color: white;
 }
 </style>
