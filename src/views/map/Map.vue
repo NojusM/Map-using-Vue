@@ -5,7 +5,7 @@
       <l-map
         ref="map"
         v-model:zoom="zoom"
-        v-model:center="center"
+        v-model:center="markerStore.mapCenter"
         @click="markerStore.addMarkerOnMap"
       >
         <l-control-layers position="bottomright"></l-control-layers>
@@ -35,11 +35,9 @@ import Marker from './Marker.vue'
 import Polyline from './Polyline.vue'
 import tileProvidersData from '@/data/tileProviders.json'
 import 'leaflet/dist/leaflet.css'
-const BASE_COORDINATES: [number, number] = [55.23479, 23.92822]
 
 const markerStore = useMarkersStore()
 const zoom = ref(7)
-const center = ref(BASE_COORDINATES as PointExpression)
 const tileProviders = ref(tileProvidersData)
 </script>
 
