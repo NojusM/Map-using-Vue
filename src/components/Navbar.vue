@@ -49,6 +49,7 @@ nav {
   padding: 1rem;
   box-sizing: border-box;
   margin-bottom: 5rem;
+  z-index: 1000;
 }
 
 .title {
@@ -61,6 +62,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .links a {
@@ -89,6 +91,7 @@ nav {
     display: none;
     flex-direction: column;
     align-items: center;
+    opacity: 90%;
   }
 
   .show-dropdown {
@@ -100,7 +103,6 @@ nav {
     padding: 1rem;
     color: white;
     background-color: var(--primary-dark);
-    opacity: 80%;
   }
 
   .links a {
