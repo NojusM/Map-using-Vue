@@ -80,6 +80,7 @@ What i done :
 - Created store with `Pinia` to store markers
 - Ability to select marker on click
 - Add distance between markers calculator
+- Add polyline connecting calculated distance markers
 
 ### Todo
 
