@@ -5,7 +5,7 @@
     :lat-lng="marker as LatLngExpression"
     :icon="index === markerStore.selectedMarker ? SELECT_MARKER : DEFAULT_ICON"
     draggable
-    @dragend="markerStore.addMarkerOnDrag"
+    @dragend="markerStore.updateMarkerOnDrag($event, index)"
     @click="markerStore.setSelectedMarker(index)"
   ></l-marker>
 </template>
