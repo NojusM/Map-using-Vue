@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import About from '../views/About.vue'
-import Map from '../views/Map.vue'
+import Map from '../views/map/Map.vue'
 
 export default createRouter({
   history: createWebHistory(),
