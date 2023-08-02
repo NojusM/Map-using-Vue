@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import L, { type PointExpression } from 'leaflet'
 import { LMap, LTileLayer, LControlLayers } from '@vue-leaflet/vue-leaflet'
 import { ref } from 'vue'
 import { useMarkersStore } from '@/stores/markers'
