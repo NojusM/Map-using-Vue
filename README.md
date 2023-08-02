@@ -82,8 +82,7 @@ What i done :
 - Add distance between markers calculator
 - Add polyline connecting calculated distance markers
 
-### Todo
+### Todo if needed
 
-- Show distance between markers
 - Let user input coordinates
 - Add geo look up (translate coordinates to location)
