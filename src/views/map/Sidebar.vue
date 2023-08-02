@@ -37,7 +37,7 @@
         >
           Select marker
         </button>
-        <button class="btn delete" @click="markerStore.removeMarker(index)">Delete marker</button>
+        <button class="btn delete" @click="markerStore.removeMarker(index)">X</button>
       </div>
     </div>
   </div>
@@ -92,10 +92,15 @@ const markerStore = useMarkersStore()
 }
 
 .btn.delete {
-  background-color: hsl(0, 90%, 20%);
+  width: auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: hsl(0, 90%, 40%);
+  background-color: white;
 }
 
 .btn.delete:hover {
+  color: white;
   background-color: hsl(0, 90%, 40%);
 }
 
