@@ -25,7 +25,7 @@ export const useMarkersStore = defineStore('markers', {
       const truncatedLng = truncateFloat(lng, 5)
       this.markers[this.selectedMarker] = [truncatedLat, truncatedLng]
     },
-    addMarkerOnDrag(e: { target: { getLatLng: () => LatLng } }) {
+    updateMarkerOnDrag(e: { target: { getLatLng: () => LatLng } }) {
       const { lat, lng } = e.target.getLatLng()
       const truncatedLat = truncateFloat(lat, 5)
       const truncatedLng = truncateFloat(lng, 5)
