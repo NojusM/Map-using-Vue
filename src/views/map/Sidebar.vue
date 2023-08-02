@@ -25,11 +25,12 @@
     </div>
     <div class="label title-label">Markers</div>
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
-    <div v-for="(marker, index) in markerStore.markers" :key="index" class="marker-info">
-      <p
-        :class="['select', { active: index === markerStore.selectedMarker }]"
-        @click="markerStore.setSelectedMarker(index)"
-      >
+    <div
+      v-for="(marker, index) in markerStore.markers"
+      :key="index"
+      :class="['marker-info', { active: index === markerStore.selectedMarker }]"
+    >
+      <p @click="markerStore.setSelectedMarker(index)">
         <span class="label">Marker {{ index + 1 }} - </span>
         <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
       </p>
@@ -58,37 +59,43 @@ const markerStore = useMarkersStore()
   font-style: italic;
 }
 
-.buttons {
+.marker-info {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--primary-dark);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.marker-info.active {
+  color: hsl(120, 54%, 50%);
 }
 .btn {
   width: 100%;
   font-size: 1.5rem;
   font-weight: 700;
   padding: 0.5rem;
-  border: 2px solid black;
+  border: 1px solid var(--primary-dark);
   border-radius: 1rem;
   cursor: pointer;
-  background-color: var(--primary-dark);
-  color: white;
+  background-color: white;
+  color: var(--primary);
 }
 
 .btn:hover {
-  background-color: var(--primary);
-}
-
-.btn.select.active {
-  background-color: hsl(120, 47%, 55%);
-  color: black;
+  border-color: var(--primary-bright);
 }
 
 .btn.delete {
-  width: auto;
-  padding: 1rem;
+  position: relative;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 0.5rem;
   color: hsl(0, 90%, 40%);
   background-color: white;
