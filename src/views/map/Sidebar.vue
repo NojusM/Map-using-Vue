@@ -25,28 +25,53 @@
     </div>
     <div class="label title-label">Markers</div>
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
-    <div v-for="(marker, index) in markerStore.markers" :key="index" class="marker-info">
-      <p>
+    <div
+      v-for="(marker, index) in markerStore.markers"
+      :key="index"
+      :class="['marker-info', { active: index === markerStore.selectedMarker }]"
+    >
+      <p @click="markerStore.setSelectedMarker(index)">
         <span class="label">Marker {{ index + 1 }} - </span>
         <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
       </p>
-      <div class="buttons">
-        <button
-          :class="['btn select', { active: index === markerStore.selectedMarker }]"
-          @click="markerStore.setSelectedMarker(index)"
-        >
-          Select marker
-        </button>
-        <button class="btn delete" @click="markerStore.removeMarker(index)">Delete marker</button>
-      </div>
+      <button class="btn delete" @click="openModal(index)">X</button>
+      <dialog ref="deleteConfModals" v-show="showModal">
+        <div class="modal-text">
+          Are you sure you want to delete
+          <i>Marker {{ index + 1 }}</i>
+          ?
+        </div>
+        <div class="modal-buttons">
+          <button class="btn modal-delete" @click="deleteMarker(index)">Delete</button>
+          <button class="btn modal-cancel" @click="closeModal(index)">Cancel</button>
+        </div>
+      </dialog>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useMarkersStore } from '@/stores/markers'
+import { ref } from 'vue'
+const showModal = ref(false)
 
 const markerStore = useMarkersStore()
+const deleteConfModals = ref()
+const openModal = (index: number) => {
+  showModal.value = true
+  deleteConfModals.value[index].showModal()
+}
+
+const closeModal = (index: number) => {
+  deleteConfModals.value[index].close()
+  showModal.value = false
+}
+
+const deleteMarker = (index: number) => {
+  markerStore.removeMarker(index)
+  closeModal(index)
+  showModal.value = false
+}
 </script>
 
 <style scoped>
@@ -63,40 +88,51 @@ const markerStore = useMarkersStore()
   font-style: italic;
 }
 
-.buttons {
+.marker-info {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--primary-dark);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.marker-info.active {
+  color: hsl(120, 54%, 50%);
 }
 .btn {
   width: 100%;
   font-size: 1.5rem;
   font-weight: 700;
   padding: 0.5rem;
-  border: 2px solid black;
+  border: 1px solid var(--primary-dark);
   border-radius: 1rem;
   cursor: pointer;
-  background-color: var(--primary-dark);
-  color: white;
+  background-color: white;
+  color: var(--primary);
 }
 
 .btn:hover {
-  background-color: var(--primary);
-}
-
-.btn.select.active {
-  background-color: hsl(120, 47%, 55%);
-  color: black;
+  border-color: var(--primary-bright);
 }
 
 .btn.delete {
-  background-color: hsl(0, 90%, 20%);
+  position: relative;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  color: var(--red);
+  background-color: white;
 }
 
 .btn.delete:hover {
-  background-color: hsl(0, 90%, 40%);
+  color: white;
+  background-color: var(--red);
 }
 
 .btn.add {
@@ -148,5 +184,46 @@ select:focus {
 select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+dialog {
+  inset: 0;
+  margin: auto;
+  border: 2px solid var(--red);
+  background-color: whitesmoke;
+  border-radius: 1rem;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-text {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+}
+.modal-cancel {
+  font-size: 3rem;
+}
+
+.modal-delete {
+  color: var(--red);
+  font-size: 3rem;
+}
+
+.modal-delete:hover {
+  background-color: var(--red);
+  color: white;
 }
 </style>
