@@ -2,19 +2,19 @@
   <div class="sidebar">
     <div class="marker-distance">
       <div class="label">Distance between</div>
-      <select v-model="selectedMarkerIndexFrom">
+      <select v-model="markerStore.distanceIndexses.from">
         <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
           Marker {{ index + 1 }}
         </option>
       </select>
       and
-      <select v-model="selectedMarkerIndexTo">
+      <select v-model="markerStore.distanceIndexses.to">
         <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
           Marker {{ index + 1 }}
         </option>
       </select>
       <div class="coordinates">
-        {{ markerStore.getDistanceString(selectedMarkerIndexFrom, selectedMarkerIndexTo) }}
+        {{ markerStore.getDistanceString() }}
       </div>
     </div>
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
@@ -38,11 +38,8 @@
 
 <script setup lang="ts">
 import { useMarkersStore } from '@/stores/markers'
-import { ref } from 'vue'
 
 const markerStore = useMarkersStore()
-const selectedMarkerIndexFrom = ref()
-const selectedMarkerIndexTo = ref()
 </script>
 
 <style scoped>

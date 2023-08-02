@@ -9,7 +9,11 @@ const BASE_COORDINATES: Marker = [55.23479, 23.92822]
 export const useMarkersStore = defineStore('markers', {
   state: () => ({
     markers: [] as Marker[],
-    selectedMarker: 0
+    selectedMarker: 0,
+    distanceIndexses: {
+      from: undefined as number | undefined,
+      to: undefined as number | undefined
+    }
   }),
   actions: {
     addMarker() {
@@ -34,13 +38,14 @@ export const useMarkersStore = defineStore('markers', {
       this.selectedMarker = selectedMarker
     },
 
-    getDistanceString(originIndex: number | undefined, destinationIndex: number | undefined) {
-      if (originIndex === undefined || destinationIndex === undefined) return 0
+    getDistanceString() {
+      if (this.distanceIndexses.from === undefined || this.distanceIndexses.to === undefined)
+        return 0
 
-      const lat1 = toRadian(this.markers[originIndex][0])
-      const lon1 = toRadian(this.markers[originIndex][1])
-      const lat2 = toRadian(this.markers[destinationIndex][0])
-      const lon2 = toRadian(this.markers[destinationIndex][1])
+      const lat1 = toRadian(this.markers[this.distanceIndexses.from][0])
+      const lon1 = toRadian(this.markers[this.distanceIndexses.from][1])
+      const lat2 = toRadian(this.markers[this.distanceIndexses.to][0])
+      const lon2 = toRadian(this.markers[this.distanceIndexses.to][1])
 
       const deltaLat = lat2 - lat1
       const deltaLon = lon2 - lon1
