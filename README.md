@@ -1,7 +1,7 @@
 # Map-using-Vue
 
 Practical task to create a map app using Vue.js <br/>
-Live version available on [gh-pages](nojusm.github.io/Map-using-Vue/)
+Live version available on [gh-pages](https://nojusm.github.io/Map-using-Vue/)
 
 ## Learn basics of Vue
 
