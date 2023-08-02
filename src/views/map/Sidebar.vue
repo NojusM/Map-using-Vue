@@ -26,19 +26,14 @@
     <div class="label title-label">Markers</div>
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
     <div v-for="(marker, index) in markerStore.markers" :key="index" class="marker-info">
-      <p>
+      <p
+        :class="['select', { active: index === markerStore.selectedMarker }]"
+        @click="markerStore.setSelectedMarker(index)"
+      >
         <span class="label">Marker {{ index + 1 }} - </span>
         <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
       </p>
-      <div class="buttons">
-        <button
-          :class="['btn select', { active: index === markerStore.selectedMarker }]"
-          @click="markerStore.setSelectedMarker(index)"
-        >
-          Select marker
-        </button>
-        <button class="btn delete" @click="markerStore.removeMarker(index)">X</button>
-      </div>
+      <button class="btn delete" @click="markerStore.removeMarker(index)">X</button>
     </div>
   </div>
 </template>
