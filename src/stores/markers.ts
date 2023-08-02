@@ -39,23 +39,43 @@ export const useMarkersStore = defineStore('markers', {
     },
 
     getDistanceMarkers() {
-      if (this.distanceIndexses.from === undefined || this.distanceIndexses.to === undefined)
+      const fromIndex = this.distanceIndexses.from
+      const toIndex = this.distanceIndexses.to
+      if (
+        fromIndex === undefined ||
+        toIndex === undefined ||
+        fromIndex < 0 ||
+        fromIndex >= this.markers.length ||
+        toIndex < 0 ||
+        toIndex >= this.markers.length
+      ) {
         return []
-      const distanceMarkers = [
-        this.markers[this.distanceIndexses.from],
-        this.markers[this.distanceIndexses.to]
-      ]
+      }
+
+      const distanceMarkers = [this.markers[fromIndex], this.markers[toIndex]]
       return distanceMarkers as LatLngExpression[]
     },
 
     getDistanceString() {
-      if (this.distanceIndexses.from === undefined || this.distanceIndexses.to === undefined)
-        return 0
+      const fromIndex = this.distanceIndexses.from
+      const toIndex = this.distanceIndexses.to
 
-      const lat1 = toRadian(this.markers[this.distanceIndexses.from][0])
-      const lon1 = toRadian(this.markers[this.distanceIndexses.from][1])
-      const lat2 = toRadian(this.markers[this.distanceIndexses.to][0])
-      const lon2 = toRadian(this.markers[this.distanceIndexses.to][1])
+      if (
+        fromIndex === undefined ||
+        toIndex === undefined ||
+        fromIndex < 0 ||
+        fromIndex >= this.markers.length ||
+        toIndex < 0 ||
+        toIndex >= this.markers.length ||
+        this.markers.length < 2
+      ) {
+        return 0
+      }
+
+      const lat1 = toRadian(this.markers[fromIndex][0])
+      const lon1 = toRadian(this.markers[fromIndex][1])
+      const lat2 = toRadian(this.markers[toIndex][0])
+      const lon2 = toRadian(this.markers[toIndex][1])
 
       const deltaLat = lat2 - lat1
       const deltaLon = lon2 - lon1
