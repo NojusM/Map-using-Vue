@@ -18,6 +18,7 @@
           layer-type="base"
         />
         <Marker />
+        <Polyline />
       </l-map>
     </div>
   </div>
@@ -31,6 +32,7 @@ import { ref } from 'vue'
 import { useMarkersStore } from '@/stores/markers'
 import Sidebar from './Sidebar.vue'
 import Marker from './Marker.vue'
+import Polyline from './Polyline.vue'
 import tileProvidersData from '@/data/tileProviders.json'
 import 'leaflet/dist/leaflet.css'
 const BASE_COORDINATES: [number, number] = [55.23479, 23.92822]
