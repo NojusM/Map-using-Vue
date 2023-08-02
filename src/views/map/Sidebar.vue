@@ -27,7 +27,7 @@
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
     <div v-for="(marker, index) in markerStore.markers" :key="index" class="marker-info">
       <p>
-        <span class="label">Marker position: </span>
+        <span class="label">Marker {{ index + 1 }} - </span>
         <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
       </p>
       <div class="buttons">
