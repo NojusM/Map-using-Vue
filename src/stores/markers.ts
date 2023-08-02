@@ -16,7 +16,19 @@ export const useMarkersStore = defineStore('markers', {
   }),
   actions: {
     addMarker() {
-      this.markers.push(this.mapCenter as Marker)
+      const center = this.mapCenter as LatLngExpression
+      let lat: number
+      let lng: number
+      if (Array.isArray(center)) {
+        ;[lat, lng] = center
+      } else {
+        lat = center.lat
+        lng = center.lng
+      }
+      const truncatedLat = truncateFloat(lat, 5)
+      const truncatedLng = truncateFloat(lng, 5)
+
+      this.markers.push([truncatedLat, truncatedLng])
     },
     addMarkerOnMap(e: { latlng: LatLng }) {
       const { lat, lng } = e.latlng
