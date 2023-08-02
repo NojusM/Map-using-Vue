@@ -57,7 +57,7 @@ export const useMarkersStore = defineStore('markers', {
       const distance = c * EARTH_RADIUS
 
       return distance > 1
-        ? `${truncateFloat(distance, 3)} km`
+        ? `${truncateFloat(distance, 2)} km`
         : `${truncateFloat(distance * 1000, 0)} m`
     }
   }
