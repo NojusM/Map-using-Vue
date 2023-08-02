@@ -6,12 +6,12 @@ export default createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: '/Map-using-Vue/',
       name: 'About',
       component: About
     },
     {
-      path: '/map',
+      path: '/Map-using-Vue/map',
       name: 'Map',
       component: Map
     }
