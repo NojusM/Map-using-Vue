@@ -78,6 +78,7 @@ What i done :
 - Add sidebar
 - Created store with `Pinia` to store markers
 - Ability to select marker on click
+- Add distance between markers calculator
 
 ### Todo
 
