@@ -1,22 +1,29 @@
 <template>
   <div class="sidebar">
-    <div class="marker-distance">
-      <div class="label">Distance between</div>
-      <select v-model="markerStore.distanceIndexses.from">
-        <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
-          Marker {{ index + 1 }}
-        </option>
-      </select>
-      and
-      <select v-model="markerStore.distanceIndexses.to">
-        <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
-          Marker {{ index + 1 }}
-        </option>
-      </select>
-      <div class="coordinates">
-        {{ markerStore.getDistanceString() }}
+    <div class="distance-wrapper">
+      <div class="label title-label">Distance between</div>
+      <div class="distance-input">
+        <select
+          v-model="markerStore.distanceIndexses.from"
+          :disabled="markerStore.markers.length <= 1"
+        >
+          <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
+            Marker {{ index + 1 }}
+          </option>
+        </select>
+        -
+        <select
+          v-model="markerStore.distanceIndexses.to"
+          :disabled="markerStore.markers.length <= 1"
+        >
+          <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
+            Marker {{ index + 1 }}
+          </option>
+        </select>
+        <div class="coordinates">= {{ markerStore.getDistanceString() }}</div>
       </div>
     </div>
+    <div class="label title-label">Markers</div>
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
     <div v-for="(marker, index) in markerStore.markers" :key="index" class="marker-info">
       <p>
@@ -93,6 +100,53 @@ const markerStore = useMarkersStore()
 }
 
 .btn.add {
-  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.title-label {
+  text-align: center;
+  margin-top: 1rem;
+}
+.distance-wrapper {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid var(--primary-dark);
+  padding-bottom: 1rem;
+}
+
+.distance-input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid var(--primary-dark);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  min-width: 10rem;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+
+select:hover {
+  border-color: var(--primary-bright);
+}
+
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-dark);
+}
+
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>
