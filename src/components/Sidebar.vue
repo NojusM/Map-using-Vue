@@ -1,5 +1,23 @@
 <template>
   <div class="sidebar">
+    <div class="marker-distance">
+      <div class="label">Distance between</div>
+      <select v-model="selectedMarkerIndexFrom">
+        <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
+          Marker {{ index + 1 }}
+        </option>
+      </select>
+      and
+      <select v-model="selectedMarkerIndexTo">
+        <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
+          Marker {{ index + 1 }}
+        </option>
+      </select>
+      <div class="coordinates">
+        {{ markerStore.getDistanceString(selectedMarkerIndexFrom, selectedMarkerIndexTo) }}
+      </div>
+    </div>
+    <button class="btn add" @click="markerStore.addMarker">Add marker</button>
     <div v-for="(marker, index) in markerStore.markers" :key="index" class="marker-info">
       <p>
         <span class="label">Marker position: </span>
@@ -15,15 +33,18 @@
         <button class="btn delete" @click="markerStore.removeMarker(index)">Delete marker</button>
       </div>
     </div>
-    <button class="btn add" @click="markerStore.addMarker">Add marker</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useMarkersStore } from '@/stores/markers'
+import { ref } from 'vue'
 
 const markerStore = useMarkersStore()
+const selectedMarkerIndexFrom = ref()
+const selectedMarkerIndexTo = ref()
 </script>
+
 <style scoped>
 .sidebar {
   font-size: 2rem;
