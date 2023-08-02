@@ -1,13 +1,12 @@
 import truncateFloat from '@/composibles/truncateFloat'
-import type { LatLng, LatLngExpression } from 'leaflet'
+import type { LatLng, LatLngExpression, PointExpression } from 'leaflet'
 import { defineStore } from 'pinia'
 
 type Marker = [number, number]
 
-const BASE_COORDINATES: Marker = [55.23479, 23.92822]
-
 export const useMarkersStore = defineStore('markers', {
   state: () => ({
+    mapCenter: [55.23479, 23.92822] as PointExpression,
     markers: [] as Marker[],
     selectedMarker: 0,
     distanceIndexses: {
@@ -17,7 +16,7 @@ export const useMarkersStore = defineStore('markers', {
   }),
   actions: {
     addMarker() {
-      this.markers.push(BASE_COORDINATES)
+      this.markers.push(this.mapCenter as Marker)
     },
     addMarkerOnMap(e: { latlng: LatLng }) {
       const { lat, lng } = e.latlng
