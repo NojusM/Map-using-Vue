@@ -1,5 +1,5 @@
 import truncateFloat from '@/composibles/truncateFloat'
-import type { LatLng } from 'leaflet'
+import type { LatLng, LatLngExpression } from 'leaflet'
 import { defineStore } from 'pinia'
 
 type Marker = [number, number]
@@ -36,6 +36,16 @@ export const useMarkersStore = defineStore('markers', {
     },
     setSelectedMarker(selectedMarker: number) {
       this.selectedMarker = selectedMarker
+    },
+
+    getDistanceMarkers() {
+      if (this.distanceIndexses.from === undefined || this.distanceIndexses.to === undefined)
+        return []
+      const distanceMarkers = [
+        this.markers[this.distanceIndexses.from],
+        this.markers[this.distanceIndexses.to]
+      ]
+      return distanceMarkers as LatLngExpression[]
     },
 
     getDistanceString() {
