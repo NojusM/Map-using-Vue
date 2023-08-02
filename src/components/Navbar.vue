@@ -108,7 +108,7 @@ nav {
   .links a {
     width: 100%;
     text-align: center;
-    color: inherit;
+    color: var(--primary);
   }
 
   .links a:hover {
@@ -116,7 +116,7 @@ nav {
   }
 
   .links a.router-link-exact-active {
-    color: var(--primary-bright);
+    color: white;
   }
 
   .hamburger {
