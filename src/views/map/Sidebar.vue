@@ -7,6 +7,7 @@
           v-model="markerStore.distanceIndexses.from"
           :disabled="markerStore.markers.length <= 1"
         >
+          <option :value="undefined">None</option>
           <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
             Marker {{ index + 1 }}
           </option>
@@ -16,6 +17,7 @@
           v-model="markerStore.distanceIndexses.to"
           :disabled="markerStore.markers.length <= 1"
         >
+          <option :value="undefined">None</option>
           <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
             Marker {{ index + 1 }}
           </option>
