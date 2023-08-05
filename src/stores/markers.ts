@@ -6,6 +6,7 @@ type Marker = [number, number]
 
 export const useMarkersStore = defineStore('markers', {
   state: () => ({
+    map: undefined as L.Map | undefined,
     mapCenter: [55.23479, 23.92822] as PointExpression,
     markers: [] as Marker[],
     selectedMarker: 0,
@@ -47,6 +48,11 @@ export const useMarkersStore = defineStore('markers', {
     },
     setSelectedMarker(selectedMarker: number) {
       this.selectedMarker = selectedMarker
+    },
+
+    zoomToMarker(index: number) {
+      if (!this.map) return
+      this.map?.panTo(this.markers[index])
     },
 
     getDistanceMarkers() {

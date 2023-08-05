@@ -7,6 +7,7 @@
         v-model:zoom="zoom"
         v-model:center="markerStore.mapCenter"
         @click="markerStore.addMarkerOnMap"
+        @ready="getMap()"
       >
         <l-control-layers position="bottomright"></l-control-layers>
         <l-tile-layer
@@ -38,6 +39,11 @@ import 'leaflet/dist/leaflet.css'
 const markerStore = useMarkersStore()
 const zoom = ref(7)
 const tileProviders = ref(tileProvidersData)
+const map = ref<any>(null)
+
+const getMap = () => {
+  markerStore.map = map.value.leafletObject
+}
 </script>
 
 <style scoped>
