@@ -44,7 +44,16 @@ export const useMarkersStore = defineStore('markers', {
       this.markers[index] = [truncatedLat, truncatedLng]
     },
     removeMarker(index: number) {
+      const distanceIndexes = this.distanceIndexses
       this.markers.splice(index, 1)
+
+      // Update distance indexes to undefinied if they are removed or -1 if before removed
+      if (distanceIndexes.from !== undefined && distanceIndexes.from >= index) {
+        distanceIndexes.from = distanceIndexes.from === index ? undefined : distanceIndexes.from - 1
+      }
+      if (distanceIndexes.to !== undefined && distanceIndexes.to >= index) {
+        distanceIndexes.to = distanceIndexes.to === index ? undefined : distanceIndexes.to - 1
+      }
     },
     setSelectedMarker(selectedMarker: number) {
       this.selectedMarker = selectedMarker
@@ -56,16 +65,17 @@ export const useMarkersStore = defineStore('markers', {
     },
 
     zoomToDistance() {
+      const distIndex = this.distanceIndexses
+      const markers = this.markers
       if (
         !this.map ||
-        this.distanceIndexses.from === undefined ||
-        this.distanceIndexses.to === undefined
+        distIndex.from === undefined ||
+        distIndex.to === undefined ||
+        markers.length < 2
       )
         return
-      this.map.fitBounds([
-        this.markers[this.distanceIndexses.from],
-        this.markers[this.distanceIndexses.to]
-      ])
+
+      this.map.fitBounds([markers[distIndex.from], markers[distIndex.to]])
     },
 
     getDistanceMarkers() {
