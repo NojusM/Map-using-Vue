@@ -24,6 +24,7 @@
         </select>
         <div class="coordinates">= {{ markerStore.getDistanceString() }}</div>
       </div>
+      <button class="btn" @click="markerStore.zoomToDistance">Fit to map</button>
     </div>
     <div class="label title-label">Markers</div>
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
@@ -164,6 +165,7 @@ const handleMarkerClick = (e: MouseEvent, index: number) => {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 select {

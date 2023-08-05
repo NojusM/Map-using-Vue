@@ -52,7 +52,20 @@ export const useMarkersStore = defineStore('markers', {
 
     zoomToMarker(index: number) {
       if (!this.map) return
-      this.map?.panTo(this.markers[index])
+      this.map.panTo(this.markers[index])
+    },
+
+    zoomToDistance() {
+      if (
+        !this.map ||
+        this.distanceIndexses.from === undefined ||
+        this.distanceIndexses.to === undefined
+      )
+        return
+      this.map.fitBounds([
+        this.markers[this.distanceIndexses.from],
+        this.markers[this.distanceIndexses.to]
+      ])
     },
 
     getDistanceMarkers() {
