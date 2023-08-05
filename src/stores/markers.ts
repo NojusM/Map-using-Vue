@@ -7,7 +7,9 @@ type Marker = [number, number]
 export const useMarkersStore = defineStore('markers', {
   state: () => ({
     map: undefined as L.Map | undefined,
-    mapCenter: [55.23479, 23.92822] as PointExpression,
+    geoLocationGot: false,
+    zoom: 2,
+    mapCenter: [0, 0] as PointExpression,
     markers: [] as Marker[],
     selectedMarker: 0,
     distanceIndexses: {

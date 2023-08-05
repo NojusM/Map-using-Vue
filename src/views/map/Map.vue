@@ -4,7 +4,7 @@
     <div class="map">
       <l-map
         ref="map"
-        v-model:zoom="zoom"
+        v-model:zoom="markerStore.zoom"
         v-model:center="markerStore.mapCenter"
         @click="markerStore.addMarkerOnMap"
         @ready="getMap()"
@@ -26,9 +26,8 @@
 </template>
 
 <script setup lang="ts">
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { LMap, LTileLayer, LControlLayers } from '@vue-leaflet/vue-leaflet'
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useMarkersStore } from '@/stores/markers'
 import Sidebar from './Sidebar.vue'
 import Marker from './Marker.vue'
@@ -37,13 +36,24 @@ import tileProvidersData from '@/data/tileProviders.json'
 import 'leaflet/dist/leaflet.css'
 
 const markerStore = useMarkersStore()
-const zoom = ref(7)
 const tileProviders = ref(tileProvidersData)
 const map = ref<any>(null)
 
 const getMap = () => {
   markerStore.map = map.value.leafletObject
 }
+
+onBeforeMount(() => {
+  if (!markerStore.geoLocationGot && 'geolocation' in navigator) {
+    // If geolocation is available, try to get the user's coordinates
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords
+      markerStore.mapCenter = [latitude, longitude]
+      markerStore.geoLocationGot = true
+      markerStore.zoom = 7
+    })
+  }
+})
 </script>
 
 <style scoped>
