@@ -7,7 +7,7 @@
           v-model="markerStore.distanceIndexses.from"
           :disabled="markerStore.markers.length <= 1"
         >
-          <option :value="undefined">None</option>
+          <option value="undefined">None</option>
           <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
             Marker {{ index + 1 }}
           </option>
@@ -17,13 +17,14 @@
           v-model="markerStore.distanceIndexses.to"
           :disabled="markerStore.markers.length <= 1"
         >
-          <option :value="undefined">None</option>
+          <option value="undefined">None</option>
           <option v-for="(marker, index) in markerStore.markers" :key="index" :value="index">
             Marker {{ index + 1 }}
           </option>
         </select>
         <div class="coordinates">= {{ markerStore.getDistanceString() }}</div>
       </div>
+      <button class="btn" @click="markerStore.zoomToDistance">Fit to map</button>
     </div>
     <div class="label title-label">Markers</div>
     <button class="btn add" @click="markerStore.addMarker">Add marker</button>
@@ -32,7 +33,7 @@
       :key="index"
       :class="['marker-info', { active: index === markerStore.selectedMarker }]"
     >
-      <p @click="markerStore.setSelectedMarker(index)">
+      <p @click="handleMarkerClick($event, index)">
         <span class="label">Marker {{ index + 1 }} - </span>
         <span class="coordinates">{{ marker[0] }}° N {{ marker[1] }}° E</span>
       </p>
@@ -73,6 +74,11 @@ const deleteMarker = (index: number) => {
   markerStore.removeMarker(index)
   closeModal(index)
   showModal.value = false
+}
+
+const handleMarkerClick = (e: MouseEvent, index: number) => {
+  markerStore.setSelectedMarker(index)
+  markerStore.zoomToMarker(index)
 }
 </script>
 
@@ -159,6 +165,7 @@ const deleteMarker = (index: number) => {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 select {
